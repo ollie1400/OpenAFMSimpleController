@@ -14,6 +14,7 @@ namespace simpleController
 {
     public partial class Grapher : Form
     {
+        Form1 parent;
         SerialPort port;
         ManualResetEvent end;
         Thread sampler;
@@ -52,8 +53,9 @@ namespace simpleController
             "SIGADC::GET 3;"
         };
 
-        public Grapher(SerialPort port)
+        public Grapher(Form1 parent, SerialPort port)
         {
+            this.parent = parent;
             this.port = port;
             InitializeComponent();
             chart1.Series[0].Points.Clear();
@@ -62,7 +64,10 @@ namespace simpleController
 
             numericConvertMin.Value = 0;
             numericConvertMax.Value = 1664;
-            
+
+            parent.RegisterListener(false);
+
+
         }
 
         private void Grapher_Load(object sender, EventArgs e)
@@ -108,13 +113,21 @@ namespace simpleController
                     toSend1 = commands[commandIndex1];
                     toSend2 = commands[commandIndex2];
 
-                    port.Write(toSend1);
-                    response = port.ReadLine();
+                    lock(port)
+                    {
+                        port.Write(toSend1);
+                        response = port.ReadLine();
+                        //response = parent.ReadLine();
+                    }
                     parsed1 = Double.TryParse(response, out point1);
                     Console.WriteLine(response);
 
-                    port.Write(toSend2);
-                    response = port.ReadLine();
+                    lock (port)
+                    {
+                        port.Write(toSend2);
+                        response = port.ReadLine();
+                        //response = parent.ReadLine();
+                    }
                     parsed2 = Double.TryParse(response, out point2);
                     Console.WriteLine(response);
 
@@ -185,6 +198,8 @@ namespace simpleController
             //end.WaitOne();
             end.Reset();
             sampler = null;
+
+            parent.RegisterListener(true);
         }
 
         private void check_CheckedChanged(object sender, EventArgs e)

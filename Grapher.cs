@@ -40,7 +40,9 @@ namespace simpleController
             "A",
             "B",
             "C",
-            "D"
+            "D",
+            "FES",
+            "FES software"
         };
         string[] commands =
         {
@@ -50,7 +52,8 @@ namespace simpleController
             "SIGADC::GET 0;",
             "SIGADC::GET 1;",
             "SIGADC::GET 2;",
-            "SIGADC::GET 3;"
+            "SIGADC::GET 3;",
+            "SIG::FES?;",
         };
 
         public Grapher(Form1 parent, SerialPort port)
@@ -110,18 +113,50 @@ namespace simpleController
 
                 while (!quitsampler)
                 {
-                    toSend1 = commands[commandIndex1];
-                    toSend2 = commands[commandIndex2];
-
-                    lock(port)
+                    if (signals[commandIndex1] == "FES software")
                     {
-                        port.Write(toSend1);
-                        response = port.ReadLine();
-                        //response = parent.ReadLine();
+                        int a = 0;
+                        int b = 0;
+                        int c = 0;
+                        int d = 0;
+                        try {
+                            port.Write("SIGADC::GET 0;");
+                            a = int.Parse(port.ReadLine());
+                            port.Write("SIGADC::GET 1;");
+                            b = int.Parse(port.ReadLine());
+                            port.Write("SIGADC::GET 2;");
+                            c = int.Parse(port.ReadLine());
+                            port.Write("SIGADC::GET 3;");
+                            d = int.Parse(port.ReadLine());
+                            parsed1 = true;
+                        } catch (Exception ex)
+                        {
+                            point1 = 999;
+                            parsed1 = false;
+                        }
+                        point1 = (a + c) - (b + d);
                     }
-                    parsed1 = Double.TryParse(response, out point1);
-                    Console.WriteLine(response);
+                    else
+                    {
+                        toSend1 = commands[commandIndex1];
+                        lock (port)
+                        {
+                            port.Write(toSend1);
+                            response = port.ReadLine();
+                            //response = parent.ReadLine();
+                        }
+                        parsed1 = Double.TryParse(response, out point1);
+                        Console.WriteLine(response);
+                        if (convert1)
+                        {
+                            point1 = 5.0 * (point1 - adcMin) / (adcMax - adcMin);
+                        }
+                    }
 
+
+
+
+                    toSend2 = commands[commandIndex2];
                     lock (port)
                     {
                         port.Write(toSend2);
@@ -130,12 +165,6 @@ namespace simpleController
                     }
                     parsed2 = Double.TryParse(response, out point2);
                     Console.WriteLine(response);
-
-                    // convert?
-                    if (convert1)
-                    {
-                        point1 = 5.0 * (point1 - adcMin) / (adcMax - adcMin);
-                    }
                     if (convert2)
                     {
                         point2 = 5.0 * (point2 - adcMin) / (adcMax - adcMin);
@@ -226,6 +255,11 @@ namespace simpleController
             {
                 adcMax = (int)numericConvertMax.Value;
             }
+        }
+
+        private void numericDelay_ValueChanged(object sender, EventArgs e)
+        {
+            samplerSleep = (int)numericDelay.Value;
         }
     }
 }

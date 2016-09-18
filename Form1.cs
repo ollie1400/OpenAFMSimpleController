@@ -110,16 +110,16 @@ namespace simpleController
             int btr;
             byte[] buffer;
 
-            lock(port)
-            {
+            //lock(port)
+            //{
                 btr = port.BytesToRead;
                 buffer = new byte[btr];
                 port.Read(buffer, 0, btr);
 
                 // copy to input buffer
-                Array.Copy(buffer, 0, serialBuffer, bytesToRead, btr);
-                bytesToRead += btr;
-            }
+                //Array.Copy(buffer, 0, serialBuffer, bytesToRead, btr);
+                //bytesToRead += btr;
+            //}
 
             Invoke((Action)(() =>
             {
@@ -219,13 +219,18 @@ namespace simpleController
             }
         }
 
+        bool sentFromtrackVCz = false;
         private void trackVCz_Scroll(object sender, EventArgs e)
         {
+            sentFromtrackVCz = true;
             double min = trackVCz.Minimum;
             double max = trackVCz.Maximum;
             double val = trackVCz.Value;
             double voltage = 5.0 * (val - min) / (max - min);
-            lock (port) port.Write("VCDAC::SET 8 " + voltage.ToString("F4") + ";");
+            //lock (port) port.Write("VCDAC::SET 8 " + voltage.ToString("F4") + ";");
+            lock (port) port.Write("VCDAC::SETV 8 " + val + ";");
+            numericFocusCurrent.Value = trackVCz.Value;
+            sentFromtrackVCz = false;
         }
 
         private void trackVCt_Scroll_1(object sender, EventArgs e)
@@ -249,6 +254,25 @@ namespace simpleController
         private void button1_Click(object sender, EventArgs e)
         {
             string str = ReadLine();
+        }
+
+        bool sentFromNumeric = false;
+        private void numeric_ValueChanged(object sender, EventArgs e)
+        {
+            sentFromNumeric = true;
+            if (sender == numericFocusMin)
+            {
+                trackVCz.Minimum = (int)numericFocusMin.Value;
+            }
+            else if (sender == numericFocusMax)
+            {
+                trackVCz.Maximum = (int)numericFocusMax.Value;
+            }
+            else if (sender == numericFocusCurrent)
+            {
+                if (!sentFromtrackVCz) trackVCz.Value = (int)numericFocusCurrent.Value;
+            }
+            sentFromNumeric = false;
         }
     }
 }

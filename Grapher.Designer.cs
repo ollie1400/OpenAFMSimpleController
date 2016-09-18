@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.comboSource1 = new System.Windows.Forms.ComboBox();
             this.buttonGo = new System.Windows.Forms.Button();
@@ -44,24 +44,27 @@
             this.checkConvert2 = new System.Windows.Forms.CheckBox();
             this.numericConvertMax = new System.Windows.Forms.NumericUpDown();
             this.numericConvertMin = new System.Windows.Forms.NumericUpDown();
+            this.numericDelay = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericConvertMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericConvertMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).BeginInit();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
             this.chart1.Location = new System.Drawing.Point(22, 35);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series1.BorderWidth = 4;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series3.BorderWidth = 4;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(608, 246);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -108,16 +111,16 @@
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
+            chartArea4.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea4);
             this.chart2.Location = new System.Drawing.Point(25, 313);
             this.chart2.Name = "chart2";
             this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-            series2.BorderWidth = 4;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
-            series2.Name = "Series1";
-            this.chart2.Series.Add(series2);
+            series4.BorderWidth = 4;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.StepLine;
+            series4.Name = "Series1";
+            this.chart2.Series.Add(series4);
             this.chart2.Size = new System.Drawing.Size(608, 246);
             this.chart2.TabIndex = 6;
             this.chart2.Text = "chart2";
@@ -188,11 +191,45 @@
             this.numericConvertMin.TabIndex = 12;
             this.numericConvertMin.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
+            // numericDelay
+            // 
+            this.numericDelay.Location = new System.Drawing.Point(464, 8);
+            this.numericDelay.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericDelay.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericDelay.Name = "numericDelay";
+            this.numericDelay.Size = new System.Drawing.Size(78, 20);
+            this.numericDelay.TabIndex = 13;
+            this.numericDelay.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericDelay.ValueChanged += new System.EventHandler(this.numericDelay_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(548, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "ms";
+            // 
             // Grapher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(642, 622);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numericDelay);
             this.Controls.Add(this.numericConvertMin);
             this.Controls.Add(this.numericConvertMax);
             this.Controls.Add(this.checkConvert2);
@@ -213,6 +250,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericConvertMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericConvertMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericDelay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -232,5 +270,7 @@
         private System.Windows.Forms.CheckBox checkConvert2;
         private System.Windows.Forms.NumericUpDown numericConvertMax;
         private System.Windows.Forms.NumericUpDown numericConvertMin;
+        private System.Windows.Forms.NumericUpDown numericDelay;
+        private System.Windows.Forms.Label label1;
     }
 }

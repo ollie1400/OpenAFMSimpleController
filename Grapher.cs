@@ -41,7 +41,8 @@ namespace simpleController
             "B",
             "C",
             "D",
-            "FES",
+            "FES individual",
+            "FES hardware",
             "FES software"
         };
         string[] commands =
@@ -54,6 +55,7 @@ namespace simpleController
             "SIGADC::GET 2;",
             "SIGADC::GET 3;",
             "SIG::FES?;",
+            "SIG::FESH?;",
         };
 
         public Grapher(Form1 parent, SerialPort port)

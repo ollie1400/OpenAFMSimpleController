@@ -67,6 +67,10 @@ namespace simpleController
             port = null;
             InitializeComponent();
             panelCommands.Enabled = false;
+            panelCommands2.Enabled = false;
+
+            comboSigADCGain.SelectedIndex = 0;
+            comboDiffADCGain.SelectedIndex = 0;
 
             serialBuffer = new byte[bufferLength];
             bytesToRead = 0;
@@ -87,6 +91,7 @@ namespace simpleController
 
                     buttonConnect.Text = "Disconnect";
                     panelCommands.Enabled = true;
+                    panelCommands2.Enabled = true;
 
                     SetEcho(false);
                     SetReply(false);
@@ -96,6 +101,7 @@ namespace simpleController
                     port = null;
                     buttonConnect.Text = "Connect";
                     panelCommands.Enabled = false;
+                    panelCommands2.Enabled = false;
                 }
             } catch (Exception ex)
             {
@@ -273,6 +279,41 @@ namespace simpleController
                 if (!sentFromtrackVCz) trackVCz.Value = (int)numericFocusCurrent.Value;
             }
             sentFromNumeric = false;
+        }
+
+        private void buttonSendSetup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                lock (port)
+                {
+                    port.Write("SETUP;");
+                    port.Write("" + numericStepSize.Value + ";");
+                    port.Write("" + numericLineLength.Value + ";");
+                    port.Write("" + numericSampleSize.Value + ";");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            textComms.Text = "";
+        }
+
+        private void combo_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            if (sender == comboSigADCGain)
+            {
+                lock (port) port.Write("SIGADC::GAIN " + comboSigADCGain.SelectedIndex + ";");
+            }
+            else if (sender == comboDiffADCGain)
+            {
+                lock (port) port.Write("DIFFADC::GAIN " + comboSigADCGain.SelectedIndex + ";");
+            }
         }
     }
 }

@@ -35,6 +35,10 @@
             this.buttonReadSig = new System.Windows.Forms.Button();
             this.buttonGrapher = new System.Windows.Forms.Button();
             this.panelCommands = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.comboSigADCGain = new System.Windows.Forms.ComboBox();
+            this.comboDiffADCGain = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -60,10 +64,6 @@
             this.buttonSend = new System.Windows.Forms.Button();
             this.panelCommands2 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboDiffADCGain = new System.Windows.Forms.ComboBox();
-            this.comboSigADCGain = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).BeginInit();
             this.panelCommands.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericStepSize)).BeginInit();
@@ -172,6 +172,60 @@
             this.panelCommands.Name = "panelCommands";
             this.panelCommands.Size = new System.Drawing.Size(298, 664);
             this.panelCommands.TabIndex = 6;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(23, 486);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(72, 13);
+            this.label9.TabIndex = 32;
+            this.label9.Text = "Sig ADC Gain";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(23, 459);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 13);
+            this.label8.TabIndex = 31;
+            this.label8.Text = "Diff ADC Gain";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // comboSigADCGain
+            // 
+            this.comboSigADCGain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboSigADCGain.FormattingEnabled = true;
+            this.comboSigADCGain.Items.AddRange(new object[] {
+            "2/3",
+            "1",
+            "2",
+            "4",
+            "8",
+            "16"});
+            this.comboSigADCGain.Location = new System.Drawing.Point(119, 483);
+            this.comboSigADCGain.Name = "comboSigADCGain";
+            this.comboSigADCGain.Size = new System.Drawing.Size(121, 21);
+            this.comboSigADCGain.TabIndex = 30;
+            this.comboSigADCGain.SelectionChangeCommitted += new System.EventHandler(this.combo_SelectionChangeCommitted);
+            // 
+            // comboDiffADCGain
+            // 
+            this.comboDiffADCGain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDiffADCGain.FormattingEnabled = true;
+            this.comboDiffADCGain.Items.AddRange(new object[] {
+            "2/3",
+            "1",
+            "2",
+            "4",
+            "8",
+            "16"});
+            this.comboDiffADCGain.Location = new System.Drawing.Point(119, 456);
+            this.comboDiffADCGain.Name = "comboDiffADCGain";
+            this.comboDiffADCGain.Size = new System.Drawing.Size(121, 21);
+            this.comboDiffADCGain.TabIndex = 29;
+            this.comboDiffADCGain.SelectionChangeCommitted += new System.EventHandler(this.combo_SelectionChangeCommitted);
             // 
             // label7
             // 
@@ -290,6 +344,11 @@
             this.numericFocusCurrent.Name = "numericFocusCurrent";
             this.numericFocusCurrent.Size = new System.Drawing.Size(65, 20);
             this.numericFocusCurrent.TabIndex = 21;
+            this.numericFocusCurrent.Value = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            0});
             this.numericFocusCurrent.ValueChanged += new System.EventHandler(this.numeric_ValueChanged);
             // 
             // numericFocusMax
@@ -370,6 +429,7 @@
             this.trackVCt.Name = "trackVCt";
             this.trackVCt.Size = new System.Drawing.Size(256, 45);
             this.trackVCt.TabIndex = 13;
+            this.trackVCt.Value = 32768;
             this.trackVCt.Scroll += new System.EventHandler(this.trackVCt_Scroll_1);
             // 
             // textMask
@@ -396,6 +456,7 @@
             this.trackVCz.Name = "trackVCz";
             this.trackVCz.Size = new System.Drawing.Size(256, 45);
             this.trackVCz.TabIndex = 10;
+            this.trackVCz.Value = 32768;
             this.trackVCz.Scroll += new System.EventHandler(this.trackVCz_Scroll);
             // 
             // checkReply
@@ -469,59 +530,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // comboDiffADCGain
-            // 
-            this.comboDiffADCGain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDiffADCGain.FormattingEnabled = true;
-            this.comboDiffADCGain.Items.AddRange(new object[] {
-            "2/3",
-            "1",
-            "2",
-            "4",
-            "8",
-            "16"});
-            this.comboDiffADCGain.Location = new System.Drawing.Point(119, 456);
-            this.comboDiffADCGain.Name = "comboDiffADCGain";
-            this.comboDiffADCGain.Size = new System.Drawing.Size(121, 21);
-            this.comboDiffADCGain.TabIndex = 29;
-            this.comboDiffADCGain.SelectionChangeCommitted += new System.EventHandler(this.combo_SelectionChangeCommitted);
-            // 
-            // comboSigADCGain
-            // 
-            this.comboSigADCGain.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboSigADCGain.FormattingEnabled = true;
-            this.comboSigADCGain.Items.AddRange(new object[] {
-            "2/3",
-            "1",
-            "2",
-            "4",
-            "8",
-            "16"});
-            this.comboSigADCGain.Location = new System.Drawing.Point(119, 483);
-            this.comboSigADCGain.Name = "comboSigADCGain";
-            this.comboSigADCGain.Size = new System.Drawing.Size(121, 21);
-            this.comboSigADCGain.TabIndex = 30;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 459);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 13);
-            this.label8.TabIndex = 31;
-            this.label8.Text = "Diff ADC Gain";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(23, 486);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(72, 13);
-            this.label9.TabIndex = 32;
-            this.label9.Text = "Sig ADC Gain";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -534,6 +542,7 @@
             this.Controls.Add(this.buttonConnect);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).EndInit();
             this.panelCommands.ResumeLayout(false);

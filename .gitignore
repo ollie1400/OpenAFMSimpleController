@@ -1,5 +1,2 @@
-Properties/
-*.config
-*.manifest
 bin/Debug/simpleController.vshost.exe
 obj/

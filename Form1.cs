@@ -312,8 +312,13 @@ namespace simpleController
             }
             else if (sender == comboDiffADCGain)
             {
-                lock (port) port.Write("DIFFADC::GAIN " + comboSigADCGain.SelectedIndex + ";");
+                lock (port) port.Write("DIFFADC::GAIN " + comboDiffADCGain.SelectedIndex + ";");
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (grapher != null && !grapher.IsDisposed) grapher.Close();
         }
     }
 }

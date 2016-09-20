@@ -35,6 +35,15 @@
             this.buttonReadSig = new System.Windows.Forms.Button();
             this.buttonGrapher = new System.Windows.Forms.Button();
             this.panelCommands = new System.Windows.Forms.Panel();
+            this.numericZSteps = new System.Windows.Forms.NumericUpDown();
+            this.numericYSteps = new System.Windows.Forms.NumericUpDown();
+            this.numericXSteps = new System.Windows.Forms.NumericUpDown();
+            this.buttonMoveZMinus = new System.Windows.Forms.Button();
+            this.buttonMoveZPlus = new System.Windows.Forms.Button();
+            this.buttonMoveYMinus = new System.Windows.Forms.Button();
+            this.buttonMoveYPlus = new System.Windows.Forms.Button();
+            this.buttonMoveXMinus = new System.Windows.Forms.Button();
+            this.buttonMoveXPlus = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboSigADCGain = new System.Windows.Forms.ComboBox();
@@ -64,8 +73,13 @@
             this.buttonSend = new System.Windows.Forms.Button();
             this.panelCommands2 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
+            this.buttonGetPos = new System.Windows.Forms.Button();
+            this.checkGetPosAfterMove = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).BeginInit();
             this.panelCommands.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericZSteps)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericYSteps)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericXSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStepSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLineLength)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSampleSize)).BeginInit();
@@ -141,6 +155,17 @@
             // 
             // panelCommands
             // 
+            this.panelCommands.Controls.Add(this.checkGetPosAfterMove);
+            this.panelCommands.Controls.Add(this.buttonGetPos);
+            this.panelCommands.Controls.Add(this.numericZSteps);
+            this.panelCommands.Controls.Add(this.numericYSteps);
+            this.panelCommands.Controls.Add(this.numericXSteps);
+            this.panelCommands.Controls.Add(this.buttonMoveZMinus);
+            this.panelCommands.Controls.Add(this.buttonMoveZPlus);
+            this.panelCommands.Controls.Add(this.buttonMoveYMinus);
+            this.panelCommands.Controls.Add(this.buttonMoveYPlus);
+            this.panelCommands.Controls.Add(this.buttonMoveXMinus);
+            this.panelCommands.Controls.Add(this.buttonMoveXPlus);
             this.panelCommands.Controls.Add(this.label9);
             this.panelCommands.Controls.Add(this.label8);
             this.panelCommands.Controls.Add(this.comboSigADCGain);
@@ -173,10 +198,136 @@
             this.panelCommands.Size = new System.Drawing.Size(298, 664);
             this.panelCommands.TabIndex = 6;
             // 
+            // numericZSteps
+            // 
+            this.numericZSteps.Location = new System.Drawing.Point(130, 522);
+            this.numericZSteps.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericZSteps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericZSteps.Name = "numericZSteps";
+            this.numericZSteps.Size = new System.Drawing.Size(101, 20);
+            this.numericZSteps.TabIndex = 41;
+            this.numericZSteps.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericYSteps
+            // 
+            this.numericYSteps.Location = new System.Drawing.Point(130, 493);
+            this.numericYSteps.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericYSteps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericYSteps.Name = "numericYSteps";
+            this.numericYSteps.Size = new System.Drawing.Size(101, 20);
+            this.numericYSteps.TabIndex = 40;
+            this.numericYSteps.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericXSteps
+            // 
+            this.numericXSteps.Location = new System.Drawing.Point(129, 461);
+            this.numericXSteps.Maximum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            0});
+            this.numericXSteps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericXSteps.Name = "numericXSteps";
+            this.numericXSteps.Size = new System.Drawing.Size(101, 20);
+            this.numericXSteps.TabIndex = 39;
+            this.numericXSteps.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // buttonMoveZMinus
+            // 
+            this.buttonMoveZMinus.Location = new System.Drawing.Point(78, 519);
+            this.buttonMoveZMinus.Name = "buttonMoveZMinus";
+            this.buttonMoveZMinus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveZMinus.TabIndex = 38;
+            this.buttonMoveZMinus.Text = "Z-";
+            this.buttonMoveZMinus.UseVisualStyleBackColor = true;
+            this.buttonMoveZMinus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
+            // buttonMoveZPlus
+            // 
+            this.buttonMoveZPlus.Location = new System.Drawing.Point(26, 519);
+            this.buttonMoveZPlus.Name = "buttonMoveZPlus";
+            this.buttonMoveZPlus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveZPlus.TabIndex = 37;
+            this.buttonMoveZPlus.Text = "Z+";
+            this.buttonMoveZPlus.UseVisualStyleBackColor = true;
+            this.buttonMoveZPlus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
+            // buttonMoveYMinus
+            // 
+            this.buttonMoveYMinus.Location = new System.Drawing.Point(78, 490);
+            this.buttonMoveYMinus.Name = "buttonMoveYMinus";
+            this.buttonMoveYMinus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveYMinus.TabIndex = 36;
+            this.buttonMoveYMinus.Text = "Y-";
+            this.buttonMoveYMinus.UseVisualStyleBackColor = true;
+            this.buttonMoveYMinus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
+            // buttonMoveYPlus
+            // 
+            this.buttonMoveYPlus.Location = new System.Drawing.Point(26, 490);
+            this.buttonMoveYPlus.Name = "buttonMoveYPlus";
+            this.buttonMoveYPlus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveYPlus.TabIndex = 35;
+            this.buttonMoveYPlus.Text = "Y+";
+            this.buttonMoveYPlus.UseVisualStyleBackColor = true;
+            this.buttonMoveYPlus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
+            // buttonMoveXMinus
+            // 
+            this.buttonMoveXMinus.Location = new System.Drawing.Point(77, 461);
+            this.buttonMoveXMinus.Name = "buttonMoveXMinus";
+            this.buttonMoveXMinus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveXMinus.TabIndex = 34;
+            this.buttonMoveXMinus.Text = "X-";
+            this.buttonMoveXMinus.UseVisualStyleBackColor = true;
+            this.buttonMoveXMinus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
+            // buttonMoveXPlus
+            // 
+            this.buttonMoveXPlus.Location = new System.Drawing.Point(25, 461);
+            this.buttonMoveXPlus.Name = "buttonMoveXPlus";
+            this.buttonMoveXPlus.Size = new System.Drawing.Size(46, 23);
+            this.buttonMoveXPlus.TabIndex = 33;
+            this.buttonMoveXPlus.Text = "X+";
+            this.buttonMoveXPlus.UseVisualStyleBackColor = true;
+            this.buttonMoveXPlus.Click += new System.EventHandler(this.buttonMove_Click);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(23, 486);
+            this.label9.Location = new System.Drawing.Point(89, 76);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(72, 13);
             this.label9.TabIndex = 32;
@@ -186,7 +337,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 459);
+            this.label8.Location = new System.Drawing.Point(89, 49);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(73, 13);
             this.label8.TabIndex = 31;
@@ -204,9 +355,9 @@
             "4",
             "8",
             "16"});
-            this.comboSigADCGain.Location = new System.Drawing.Point(119, 483);
+            this.comboSigADCGain.Location = new System.Drawing.Point(179, 73);
             this.comboSigADCGain.Name = "comboSigADCGain";
-            this.comboSigADCGain.Size = new System.Drawing.Size(121, 21);
+            this.comboSigADCGain.Size = new System.Drawing.Size(72, 21);
             this.comboSigADCGain.TabIndex = 30;
             this.comboSigADCGain.SelectionChangeCommitted += new System.EventHandler(this.combo_SelectionChangeCommitted);
             // 
@@ -221,9 +372,9 @@
             "4",
             "8",
             "16"});
-            this.comboDiffADCGain.Location = new System.Drawing.Point(119, 456);
+            this.comboDiffADCGain.Location = new System.Drawing.Point(179, 47);
             this.comboDiffADCGain.Name = "comboDiffADCGain";
-            this.comboDiffADCGain.Size = new System.Drawing.Size(121, 21);
+            this.comboDiffADCGain.Size = new System.Drawing.Size(72, 21);
             this.comboDiffADCGain.TabIndex = 29;
             this.comboDiffADCGain.SelectionChangeCommitted += new System.EventHandler(this.combo_SelectionChangeCommitted);
             // 
@@ -530,6 +681,26 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // buttonGetPos
+            // 
+            this.buttonGetPos.Location = new System.Drawing.Point(25, 548);
+            this.buttonGetPos.Name = "buttonGetPos";
+            this.buttonGetPos.Size = new System.Drawing.Size(98, 23);
+            this.buttonGetPos.TabIndex = 42;
+            this.buttonGetPos.Text = "Get Position";
+            this.buttonGetPos.UseVisualStyleBackColor = true;
+            this.buttonGetPos.Click += new System.EventHandler(this.buttonGetPos_Click);
+            // 
+            // checkGetPosAfterMove
+            // 
+            this.checkGetPosAfterMove.AutoSize = true;
+            this.checkGetPosAfterMove.Location = new System.Drawing.Point(131, 552);
+            this.checkGetPosAfterMove.Name = "checkGetPosAfterMove";
+            this.checkGetPosAfterMove.Size = new System.Drawing.Size(135, 17);
+            this.checkGetPosAfterMove.TabIndex = 43;
+            this.checkGetPosAfterMove.Text = "Get position after move";
+            this.checkGetPosAfterMove.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -547,6 +718,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPort)).EndInit();
             this.panelCommands.ResumeLayout(false);
             this.panelCommands.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericZSteps)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericYSteps)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericXSteps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericStepSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericLineLength)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericSampleSize)).EndInit();
@@ -601,6 +775,17 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox comboSigADCGain;
+        private System.Windows.Forms.NumericUpDown numericZSteps;
+        private System.Windows.Forms.NumericUpDown numericYSteps;
+        private System.Windows.Forms.NumericUpDown numericXSteps;
+        private System.Windows.Forms.Button buttonMoveZMinus;
+        private System.Windows.Forms.Button buttonMoveZPlus;
+        private System.Windows.Forms.Button buttonMoveYMinus;
+        private System.Windows.Forms.Button buttonMoveYPlus;
+        private System.Windows.Forms.Button buttonMoveXMinus;
+        private System.Windows.Forms.Button buttonMoveXPlus;
+        private System.Windows.Forms.CheckBox checkGetPosAfterMove;
+        private System.Windows.Forms.Button buttonGetPos;
     }
 }
 

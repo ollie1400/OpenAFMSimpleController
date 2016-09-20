@@ -320,5 +320,79 @@ namespace simpleController
         {
             if (grapher != null && !grapher.IsDisposed) grapher.Close();
         }
+
+
+        // move the stage
+        int posX = 0;
+        int posY = 0;
+        int posZ = 0;
+        private void buttonMove_Click(object sender, EventArgs e)
+        {
+            string msg = "GOTO";
+            int steps = 0;
+
+            // X
+            if (sender == buttonMoveXPlus)
+            {
+                steps = (int)numericXSteps.Value;
+                msg += "X " + steps + ";";
+                posX += steps;
+            }
+            else if (sender == buttonMoveXMinus)
+            {
+                steps = -(int)numericXSteps.Value;
+                msg += "X " + steps + ";";
+                posX += steps;
+            }
+
+            // Y
+            else if (sender == buttonMoveYPlus)
+            {
+                steps = (int)numericYSteps.Value;
+                msg += "Y " + steps + ";";
+                posY += steps;
+            }
+            else if (sender == buttonMoveYMinus)
+            {
+                steps = -(int)numericYSteps.Value;
+                msg += "Y " + steps + ";";
+                posY += steps;
+            }
+
+            // Z
+            else if (sender == buttonMoveZPlus)
+            {
+                steps = (int)numericZSteps.Value;
+                msg += "Z " + steps + ";";
+                posZ += steps;
+            }
+            else if (sender == buttonMoveZMinus)
+            {
+                steps = -(int)numericZSteps.Value;
+                msg += "Z " + steps + ";";
+                posZ += steps;
+            }
+            
+            //lock(port) port.Write(msg);
+            lock (port)
+            {
+                port.Write("GOTO;");
+                port.Write("" + posX + ";");
+                port.Write("" + posY + ";");
+                port.Write("" + posZ + ";");
+            }
+
+            if (checkGetPosAfterMove.Checked) buttonGetPos.PerformClick();
+        }
+
+        private void buttonGetPos_Click(object sender, EventArgs e)
+        {
+            lock (port)
+            {
+                port.Write("POS? 1;");
+                port.Write("POS? 2;");
+                port.Write("POS? 3;");
+            }
+        }
     }
 }
